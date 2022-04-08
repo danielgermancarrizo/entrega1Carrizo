@@ -1,0 +1,23 @@
+<html>
+<head>
+  <title>Title of the document</title>
+</head>
+
+<body>
+  <h1>This is a heading</h1>
+  <p>This is a paragraph.</p>
+  <form action='/library/form/' method='POST'>
+    {% csrf_token %}
+    {% comment %}   
+    <p>Curso: <input type="text" name="curso"></p>
+    <p>Camada: <input type="text" name="camada"></p>
+    {% endcomment %}
+
+
+  {{ form.as_table }}
+<input type="submit" value="enviar">
+</form> 
+    
+</body>
+
+</html>

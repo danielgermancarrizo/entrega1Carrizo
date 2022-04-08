@@ -44,7 +44,7 @@ LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 DATABASES = {
     "default": env.db(
         "DATABASE_URL",
-        default="postgres://ajxfajma:8avnOVp-ptgDIcW9KA0KUioigyjpO4D8@batyr.db.elephantsql.com/ajxfajma",
+        default="postgres://cyohqaau:0QaQlOVVf9ugoD2CrD2qWN-8SrQJ8k19@raja.db.elephantsql.com/cyohqaau",
     ),
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
