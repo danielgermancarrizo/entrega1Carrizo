@@ -50,3 +50,17 @@ class FormView(TemplateView):
             'form' : LibraryForm()
         }
         return render(request, self.template_name, context)
+
+class SearchView(TemplateView):
+    template_name = 'forms/search.html'
+    
+    def post(self,request):
+        context = {
+            "elements" : Person.objects.filter(
+                name = request.POST.get('name')
+            )
+        }        
+     
+        return render(request,self.template_name, context)
+    
+    
