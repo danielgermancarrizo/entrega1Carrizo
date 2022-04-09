@@ -1,23 +1,31 @@
-<html>
-<head>
-  <title>Title of the document</title>
-</head>
+{% extends "base.html" %}
+{% block title %}
+{% block head_title %}
+{% endblock head_title %}
+{% endblock title %}
 
-<body>
-  <h1>This is a heading</h1>
-  <p>This is a paragraph.</p>
-  <form action='/library/form/' method='POST'>
-    {% csrf_token %}
-    {% comment %}   
-    <p>Curso: <input type="text" name="curso"></p>
-    <p>Camada: <input type="text" name="camada"></p>
-    {% endcomment %}
-
-
-  {{ form.as_table }}
-<input type="submit" value="enviar">
-</form> 
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    {% block content %}
+    <h2>Ingresar datos de persona, libro y condición</h2>
+    <br />
+    <form action="/library/form/" method="POST">
+      {% csrf_token %} {{ form.as_ul }}
+      <br />
+      <input type="submit" value="enviar" />
+    </form>
     
-</body>
-
-</html>
+    <br/><h3>Nombres completos de personas cargadas</h3>
+    
+    <table style=”background-color: black; color:white”>
+      
+        {%for element in elementsPerson %}
+        <tr>
+          <td>Nombre completo: {{element.name}}, {{element.last_name}}</td><br/>
+        </tr>
+      
+    </table>
+    {%endfor%} 
+    {% endblock %}
+  </div>
+</div>

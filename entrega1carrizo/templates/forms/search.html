@@ -1,26 +1,29 @@
-<html>
-<head>
-  <title>Title of the document</title>
-</head>
+{% extends "base.html" %}
+{% block title %}
+{% block head_title %}
+{% endblock head_title %}
+{% endblock title %}
 
-<body>
-  <h1>This is a heading</h1>
-  <p>This is a paragraph.</p>
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <h1>Buscar por nombre</h1>
+    {% block content %}
+    <h1>Búsqueda de persona</h1>
+    <p><strong>Busca por nombre y apellido, no distingue entre mayúsculas y minúsculas</strong></p>
+        <form action='/library/search/' method='POST'>
+            {% csrf_token %}
+            <input type="text" name="last_name" >
+            <input type="submit" value="enviar">  
+        </form>
 
-    <form action='/library/search/' method='POST'>
-        {% csrf_token %}
-        <input type="text" name="name">
-        <input type="submit" value="enviar">  
-    </form>
-    {%if elements%}
-    <h1>Resultados</h1>
-    {% endif %}
+        {%if elements%}
+        <br/><h2>Resultados</h2>
+        {% endif %}
 
-    {%for element in elements %}
-        <p>{{element.name}}</p>
-        <p>{{element.last_name}}</p>
-    {%endfor%}
-    
-</body>
-
-</html>
+        {%for element in elements %}
+            <li type="square">Nombre: {{element.name}} | Apellido: {{element.last_name}} | Nacimiento: {{element.birth_date}} </li>
+        {%endfor%}
+        
+    {% endblock %}
+  </div>
+</div>

@@ -8,6 +8,7 @@ from django.views.generic import TemplateView
 from typing import Any, Dict 
 from .models import Person,Book,Condition
 from .forms import LibraryForm
+from django.db.models import Q
 
 class FormView(TemplateView):
     template_name = 'forms/index.html'
@@ -41,13 +42,16 @@ class FormView(TemplateView):
             obj_person.save()
 
         context = {
-            'form' : LibraryForm()
+            'form' : LibraryForm(),
+            'elementsPerson' : Person.objects.all
+            
         }
         return render(request,self.template_name, context)    
     
     def get(self, request):
         context = {
-            'form' : LibraryForm()
+            'form' : LibraryForm(),
+            "elementsPerson" : Person.objects.all            
         }
         return render(request, self.template_name, context)
 
@@ -57,9 +61,10 @@ class SearchView(TemplateView):
     def post(self,request):
         context = {
             "elements" : Person.objects.filter(
-                name = request.POST.get('name')
+                Q(name__iexact = request.POST.get('last_name')) | Q(last_name__iexact = request.POST.get('last_name'))
             )
-        }        
+            
+        }
      
         return render(request,self.template_name, context)
     
