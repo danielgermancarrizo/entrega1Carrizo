@@ -8,6 +8,6 @@ Se puede buscar por nombre y apellido, sin diferenciar mayúsculas de minúscula
 * Ambos templates heredan de base.
 
 ***
-*El usuario admin es:
+* El usuario admin es:
 - username: admin
 - pass: 123456
